@@ -19,20 +19,11 @@ console.log(g)
 let h="Namaste"
 console.log(h)
 
-let i= a===b
+let i = "DSA"
 console.log(i)
+console.log(h+i)
 
-let j=a!==b
-console.log(j)
-
-let k=a>b
-console.log(k)
-
-let l=a<b
-console.log(l)
-
-let m=a>=b
-console.log(m)
-
-let n=a<=b
-console.log(n)
+let x = 20
+console.log(x)
+x = 30
+console.log(x)
