@@ -29,4 +29,20 @@ function countNegativeNumbers(arr) {
 
 let arr2 = [2, -6, 4, 8, 1, -9]
 let result2 = countNegativeNumbers(arr2)
-console.log(result2)
+// console.log(result2)
+
+// write a function that returns the largest number in an array
+
+function findLargest(arr) {
+  let largest = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > largest) {
+      largest = arr[i]
+    }
+  }
+  return largest
+}
+
+let arr3 = [2, -6, 4, 8, 1, -9]
+let result3 = findLargest(arr3)
+console.log(result3)  
