@@ -12,8 +12,21 @@ function findWords(words, char) {
     for (let j = 0; j < words[i].length; j++) {
       if (words[i][j] === char) {
         res.push(i)
+        // using break to exit, no need to run after finding the char
         break
       }
+    }
+  }
+  return res
+}
+
+// other approach
+
+function findWords(words, char) {
+  let res = []
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].includes(char)) {
+      res.push(i)
     }
   }
   return res
