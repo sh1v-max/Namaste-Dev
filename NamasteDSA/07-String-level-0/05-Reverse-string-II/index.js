@@ -64,3 +64,10 @@ function reverseStr(s, k) {
 let str = "abcdefg"
 const rev2 = reverseStr(str, 2)
 console.log(rev2)
+
+// time complexity: O(n)
+// why not O(n^2)?
+// because we're iterating over the array in steps of 2k for outer loop
+// also we are using half loop for inner loop
+// so it turns out to be O(n)
+// space complexity: O(n)
