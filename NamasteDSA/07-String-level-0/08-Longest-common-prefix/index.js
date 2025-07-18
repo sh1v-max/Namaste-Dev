@@ -29,5 +29,5 @@ function longestCommonPrefix(strs) {
 }
 
 
-// time complexity: O(n * m)
+// time complexity: O(S) where S is the sum of lengths of all strings
 // space complexity: O(1)
