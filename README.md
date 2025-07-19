@@ -1,4 +1,4 @@
-# Namaste DSA
+# [Namaste DSA](https://github.com/sh1v-max/Namaste-Dev/tree/main/NamasteDSA)
 
 This repository contains structured notes and JavaScript implementations based on the **Namaste DSA** course by Akshay Saini.
 
