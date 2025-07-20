@@ -33,6 +33,8 @@ function removeNthFromEnd (head, n) {
 // use a dummy node before the head to handle edge cases easily
 // move the first pointer n steps ahead
 // move both first and second pointer until first reaches the end
+// now second is just before the node to be deleted
+// use second.next = second.next.next to remove the node
 
 function removeNthFromEnd1 (head, n) {
   // creating the sentinel node
