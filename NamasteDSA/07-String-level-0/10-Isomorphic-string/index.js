@@ -25,3 +25,6 @@ function isIsomorphic(s, t) {
 
   return true;
 }
+
+// time complexity: O(n)
+// space complexity: O(n)
