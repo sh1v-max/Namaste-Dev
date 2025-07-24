@@ -71,6 +71,14 @@ MyStack.prototype.empty = function () {
   return this.q1.length === 0
 }
 
+// Time Complexity:
+// push → O(1)
+// pop/top → O(n)
+// empty → O(1)
+// Space Complexity:
+// Space Complexity = O(1)
+// In-place modifications with constant extra space.
+
 // approach 2: using one queue
 // maintain a single queue (q).
 // push(x): Add (enqueue) element to the back of the queue.
@@ -114,3 +122,12 @@ MyStack.prototype.top = function () {
 MyStack.prototype.empty = function () {
   return this.q.length === 0
 }
+
+// Time Complexity:
+// push → O(n)
+// pop → O(1)
+// top → O(1)
+// empty → O(1)
+// Space Complexity:
+// Space Complexity = O(n)
+// Where n is the total number of elements in the stack.
