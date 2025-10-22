@@ -1,5 +1,5 @@
-// 90. Subset II
-// https://leetcode.com/problems/subset-ii/
+// 90. Subsets II
+// https://leetcode.com/problems/subsets-ii/
 
 // given an integer array nums that may contain duplicates, return all possible subsets (the power set)
 
@@ -13,7 +13,7 @@
 // Input: nums = [0]
 // Output: [[],[0]]
 
-// intuition: 
+// intuition:
 // this is a backtracking problem, but when duplicated to handle
 // for each number, we either include it or skip it... that gives us 2^n subsets
 // but when there are duplicates elements like two 2's, that can lead to duplicate subsets
@@ -29,3 +29,31 @@
 //       we skip it to avoid generating duplicate subsets.
 // Recurse forward (i + 1) after choosing nums[i], then backtrack (remove last added element)
 // Continue until all subsets are explored
+
+var subsetsWithDup = function (nums) {
+  // given array nums must be sorted to handle duplicates
+  const arr = nums.sort((a, b) => a - b)
+  let res = []
+
+  let backtrack = (path, start) => {
+    // path represent the current subset being built
+    // start is the starting index
+    res.push([...path])
+    // at every step, add the curr path to the res
+    for (let i = start; i < arr.length; i++) {
+      if (i > start && arr[i - 1] === arr[i]) {
+        // only skip duplicates at the same recursion lever
+        continue
+      }
+      path.push(arr[i])
+      backtrack(path, i + 1)
+      path.pop()
+    }
+  }
+  backtrack([], 0)
+
+  return res
+}
+
+//  time complexity: O(n*2^n) as each element can be either included or excluded, has two choices
+// space complexity: O(n * 2^n) for the recursion stack and path storage
