@@ -84,5 +84,4 @@ var searchBST = function (root, val) {
   return null
 }
 
-// time: O(h) height of tree
-// space: O(1) iterative, O(h) recursive
+
