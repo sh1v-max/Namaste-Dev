@@ -18,27 +18,29 @@
 // Output: ["a","b","c"]
 
 // intuition
-// each digit (2-9) maps to some letters (like old phone keypad)
-// we need all possible strings that can be formed by choosing one letter
-// from each digit's letter set — i.e., the cartesian product of all digit-letter mappings
-// this can be solved by recursion/backtracking:
-//  - pick a letter for the current digit
-//  - move to the next digit
-//  - when all digits are used, record the built combination
+// each digit (2-9) corresponds to a set of letters, like a phone keypad
+// we need to generate every possible string formed by taking one letter per digit
+// this is a typical backtracking problem because at each step:
+//   - we make a choice (pick one letter),
+//   - explore further (move to next digit),
+//   - undo the choice (backtrack) to try another letter
 
 // approach
-// create a map of digits → letters
-// define a recursive function backtrack(index, path):
-//   - if index === digits.length, push path to result
-//   - else, for each letter in map[digits[index]], append it to path and recurse
-// handle the edge case when digits = "" (return [])
-// start recursion with backtrack(0, "")
-// finally, return the result list
+// 1. handle edge case: if digits is empty, return []
+// 2. create a mapping of digits → letters
+// 3. define a recursive helper function backtrack(path, index):
+//      - if index === digits.length, join the path into a string and add it to results
+//      - otherwise, get all possible letters for the current digit
+//        for each letter:
+//           - push it into path (choose step)
+//           - call backtrack(path, index + 1) to explore further
+//           - pop it after returning (backtrack step)
+// 4. start recursion with backtrack([], 0).
+// 5. return the result list
 
 var letterCombinations = function (digits) {
-  if(digits.length === 0) return []
-
-  const map = {
+  if (!digits.length) return []
+  let letters = {
     2: 'abc',
     3: 'def',
     4: 'ghi',
@@ -48,29 +50,26 @@ var letterCombinations = function (digits) {
     8: 'tuv',
     9: 'wxyz',
   }
-
-  const res = []
-  const backtrack = (index, path) => {
+  let result = []
+  let backtrack = (path, index) => {
     // base case
-    // if the current combination is done, store it
+    // after processing all digits join the path and add to res
     if (index === digits.length) {
-      res.push(path)
+      result.push(path.join(""))
+      // as index is equal to digits length, we have formed a valid combination and backtrack
       return
     }
-
-    // get the letters that the current digit maps to
-    const letters = map[digits[index]]
-
-    // loop through the letters and call recursion
-    for (let ch of letters) {
-      backtrack(index + 1, path + ch)
+    // every possible choice for current digit
+    let choices = letters[digits[index]]
+    for (let i = 0; i < choices.length; i++) {
+      path.push(choices[i])
+      backtrack(path, index + 1)
+      path.pop()
     }
   }
-
-  backtrack(0, "")
-  return res
+  backtrack([], 0)
+  return result
 }
-
 
 // time complexity: O(3^m * 4^n)
 // m = number of digits that map to 3 letters (2,3,4,5,6,8)
@@ -79,6 +78,6 @@ var letterCombinations = function (digits) {
 // we build each combination in O(m + n) time
 // overall: O((m + n) * 3^m * 4^n)
 
-// or simply O(4^k), k = digits.length (worst case all digits are 7 or 9)
+// or simply O(4^n), n = digits.length (worst case all digits are 7 or 9)
 
 // space complexity: O(n) for recursion stack + O(4^n) for storing results
