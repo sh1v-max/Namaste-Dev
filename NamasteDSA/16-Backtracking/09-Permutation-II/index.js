@@ -46,3 +46,31 @@
 // call backtrack([], arr) to start
 // return the collected result list
 
+var permuteUnique = function (nums) {
+  let res = []
+  nums.sort((a, b) => a - b)
+  // sort to handle duplicates
+
+  let backtrack = (path, choices) => {
+    // base case, when to stop recursion
+    if (path.length === nums.length) {
+      res.push([...path])
+      return
+    }
+    for (let i = 0; i < choices.length; i++) {
+      if (i > 0 && choices[i] === choices[i - 1]) continue
+
+      path.push(choices[i])
+      backtrack(path, [...choices.slice(0, i), ...choices.slice(i + 1)])
+      // whatever element we're choosing, we need to remove it from choices for the next recursion
+      path.pop()
+    }
+  }
+
+  backtrack([], nums)
+  // path will be empty initially [], and choices will be the original array nums
+  return res
+}
+
+// time complexity: O(n.n!) because there are n! permutations and generating each permutation takes O(n) time
+// space complexity: O(n) for the recursion stack and path storage.
