@@ -28,35 +28,35 @@ var findKthLargest = function (nums, k) {
 // you can find these function here:
 // https://datastructures-js.info/docs/priority-queue
 
+
+// kth largest element — min-heap (priority queue) approach
 // intuition:
-// the kth largest element is the element that would be at index nums.length - k
-// if the array were sorted in descending order
+// we want the element that is the kth largest in the entire array
+// naive way is to sort → but that costs O(n log n)
+// instead, we maintain a **min-heap of size k**
 //
-// instead of sorting the whole array (O(n log n)), we can maintain a "window"
-// of the k largest elements seen so far
+// why a min-heap?
+// - the heap will always store the current top k largest elements seen so far
+// - the smallest among those k sits at the top
+// - whenever the heap grows beyond k, we remove the smallest
+// this guarantees:
+// - after processing all numbers, the heap contains exactly the k largest values
+// - the smallest inside this heap = the kth largest in the array
 //
-// we use a min-heap of size k:
-// - heap always contains the k largest elements encountered
-// - the smallest among these k elements is at the top
-// - when heap size exceeds k, remove the smallest
-//
-// after processing all elements, the top of the heap is the kth largest
+// this is greedy because:
+// - we always keep the "best" k candidates (largest numbers)
+// - we always drop the smallest candidate whenever size > k
 
-// example: nums = [3,2,1,5,6,4], k = 2
-// - heap after 3 → [3]
-// - heap after 2 → [2,3]
-// - heap after 1 → [2,3] (1 is smaller than min, discard)
-// - heap after 5 → [3,5] (2 removed, 5 added)
-// - heap after 6 → [5,6] (3 removed, 6 added)
-// - heap after 4 → [5,6] (4 discarded)
-// - top of heap = 5 → 2nd largest element
-
-// approach: using MinPriorityQueue
-// 1. initialize an empty min-heap
-// 2. iterate through nums:
-//    - add element to heap (enqueue)
-//    - if heap size > k, remove top element (dequeue)
-// 3. after iteration, top of heap (front) is the kth largest
+// approach:
+// using a built-in min-priority-queue to implement the min-heap
+// - create a min-heap
+// - iterate over each number in nums:
+//       push number into heap
+//       if heap.size > k:
+//            pop()  // remove the smallest among the k+1
+// - after finishing iteration:
+//       the heap top is the kth largest element
+// - return heap.top
 
 
 var findKthLargest = function (nums, k) {
