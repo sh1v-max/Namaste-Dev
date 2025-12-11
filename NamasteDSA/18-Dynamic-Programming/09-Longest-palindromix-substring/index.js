@@ -42,8 +42,11 @@
 var longestPalindrome = function (s) {
   let n = s.length
   // created 2D dp array of size n*n
-  let dp = Array.from({ length: n }, () => Array(n).fill(null))
-  let res = [0, 1]
+  // dp[i][j] will be true if s[i..j] is a palindrome
+  let dp = Array.from({ length: n }, () => Array(n).fill(false))
+  // we're storing two thing, where it starts, and where it ends... a range
+  let res = [0, 0]
+  // res[0] = start, res[1] = end
 
   // or we can do both in one loop
   for (let i = 0; i < n; i++) {
@@ -63,6 +66,8 @@ var longestPalindrome = function (s) {
       // using the subproblem formula
       if (s[i] === s[j] && dp[i + 1][j - 1]) {
         dp[i][j] = true
+        // when dp [i][j] turn true, s[i...j] is a palindrome
+        // res will point the boundary
         res = [i, j]
       }
     }
