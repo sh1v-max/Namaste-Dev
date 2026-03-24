@@ -1,7 +1,7 @@
 // 3668-Restore-Finishing-Order
 // https://leetcode.com/problems/restore-finishing-order/
 
-// intuition: 
+// intuition:
 // we are given the finishing order of all participants
 // and a list of friends (subset of participants)
 // we need to return the friends in the same order as they appear in the race
@@ -21,10 +21,10 @@
 // initialize an empty res array
 // loop through order:
 //   if current element exists in Set:
-//     push it into res
+//   push it into res
 // return res
 
-var recoverOrder = function(order, friends) {
+var recoverOrder = function (order, friends) {
   // store friends in a set for fast lookup
   let set = new Set(friends)
 
